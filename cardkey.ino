@@ -7,10 +7,10 @@
 
 #define LCD_I2C 0x27
 
-const char IDm001[] PROGMEM = "YourID";
+const char IDm001[] PROGMEM = "01120412D417FF0A";
 const char* const IDms[] PROGMEM = { IDm001 };
 
-const char name001[] PROGMEM = "YourNAME";
+const char name001[] PROGMEM = "imaimai";
 const char* const names[] PROGMEM = { name001 };
 
 bool *is_enter;
@@ -52,7 +52,7 @@ void setup() {
   is_enter = (bool*) malloc(num_felica * sizeof(bool));
   
   myservo.attach(SERVO);
-  myservo.write(0);
+  myservo.write(90);
   delay(500);
   myservo.detach();
   
@@ -174,7 +174,7 @@ void loop() {
       lcd.print(F("Enter       "));
 
       myservo.attach(SERVO);
-      myservo.write(0);
+      myservo.write(90);
       
     // 退室
     }else{
@@ -182,7 +182,7 @@ void loop() {
       lcd.print(F("Leave       "));
 
       myservo.attach(SERVO);
-      myservo.write(90);
+      myservo.write(0);
       
     }
 
