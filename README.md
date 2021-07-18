@@ -44,7 +44,8 @@ Wait FeliCa
     と表示されます。IDと名前の登録を行ってください。
 
 ## FeliCaカードの登録方法
-* Arduino Mega 2560に電源を入れ、cardkey.inoを開いてください。
+* PCを用意し、ArduinoIDEからArduino Mega 2560に書き込めるようにしてください。
+* Arduino Mega 2560とPCを接続し、cardkey.inoを開いてください。
 * シリアルモニタを開いてください。
 * 登録したいFeliCaカードををRC-S620Sにかざすと、シリアルモニタで
     ```
