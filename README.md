@@ -26,13 +26,13 @@ Wait FeliCa
     ```
     2021/06/21 21:36:14
     Enter
-    imaimai
+    あなたのIDm
     ```
 
     ```
     2021/06/21 21:36:14
     Leave
-    imaimai
+    あなたのIDm
     ```
     と表示されます。
 * 登録されていないFeliCaカードの場合
@@ -44,43 +44,35 @@ Wait FeliCa
     と表示されます。IDと名前の登録を行ってください。
 
 ## FeliCaカードの登録方法
-* PCを用意し、ArduinoIDEからArduino Mega 2560に書き込めるようにしてください。
-* Arduino Mega 2560とPCを接続し、cardkey.inoを開いてください。
-* シリアルモニタを開いてください。
-* 登録したいFeliCaカードををRC-S620Sにかざすと、シリアルモニタで
+* カード登録用のボタンを押してください。
+* ボタン押すと、黄色LEDが点灯し、LCDに
     ```
-    Unknown FeliCa: IDm = 任意のID
+    Card Registration
+    Touch the card
     ```
-    と表示されます。これがそのFeliCaカードのIDです。
-* cardkey.inoを編集します。
-    * <code>const char IDm任意の番号(001など)[] PROGMEM = "YourID";</code>
-
-        の<code>YourID</code>の部分を先ほど表示されたIDに変えてください。
-    * <code>const char* const IDms[] PROGMEM = { };</code>
-        
-        の{ }内に↑で設定した<code>IDm任意の番号</code>を追加してください
-    * <code>const char name任意の番号(001など)[] PROGMEM = "YourNAME";</code>
-
-        の<code>YourNAME</code>の部分を先ほど任意の名前に変えてください。
-
-        (例)"iamimai", "kosen taro" など
-    * <code>const char* const names[] PROGMEM = { };</code>
-        
-        の{ }内に↑で設定した<code>name任意の番号</code>を追加してください
-
-* 例　高専太郎さんのFeliCaカードのIDが<code>0123456789ABCDEF</code>で高専花子さんのFeliCaカードのIDが<code>FEDCBA9876543210</code>だった場合
+    と表示されます。この状態で、Suica等のFeliCaカードをかざしてください。
+* そのカードが登録されていない場合
     ```
-    const char IDm001[] PROGMEM = "0123456789ABCDEF";
-    const char IDm002[] PROGMEM = "FEDCBA9876543210";
-    const char* const IDms[] PROGMEM = { IDm001, IDm002 };
-
-    const char name001[] PROGMEM = "kosen taro";
-    const char name002[] PROGMEM = "kosen hanako";
-    const char* const names[] PROGMEM = { name001, name002 };
+    Complete
     ```
+    と表示され、カードの登録が完了します。
+* 既にそのカードが登録されている場合
+    ```
+    Already registered
+    ```
+    と表示されます。
+* 間違って登録用ボタンを押してしまった場合・キャンセルしたい場合はもう一度ボタンを押してください。
+* 間違ったカードを登録してしまった場合は、microSDカードを取りだし、<code>imd.txt</code>にあるカードのIDmを変更・削除してください。
 
 ## 時刻の設定方法
-cardkey.inoをコンパイルすると、そのコンパイルした時刻に設定されます。
+cardkey.ino の以下のコードのコメントアウトを外しコンパイルすると、そのコンパイルした時刻に設定されます。
+コンパイルした後はまたコメントアウトしてください。
+```
+  // RTCの初期化
+//  clock.begin();
+//  clock.setDateTime(__DATE__, __TIME__);
+//  Serial.println("Initialize DS3231");
+```
 
 
 ## その他注意点
@@ -88,10 +80,8 @@ cardkey.inoをコンパイルすると、そのコンパイルした時刻に設
 * RTCはボタン電池の残量がある限り、Arduino Mega 2560の電源が入っていなくても自動でクロックします。時刻がずれる心配はありません。
 * 挿入されたmicroSDカードに日にちごとに入退室記録が記録されます。
 * サーボモータは動かすごとにdetatchされるので、鍵で開けることも可能です。
-* 現在の入退室状況（入室・退室）も記録されているため、その人が退室した状態・入室した状態でArudino Mega 2560をリセットしても、入退室状況がリセットされることはありません。
-    * 万が一入退室状況が違う場合は、ドアを開けた状態で入退室したりして調節してください。
-* microSDカードを抜いてしまった場合はArduino Mega 2560 の電源を入れなおしてください。正常に記録されない可能性がります。
-* もしフラットケーブルがFeliCaカードリーダ/ライターから抜けてしまった場合、コネクタ口に青いビラビラが表になるように合わせて、爪で青いビラビラを押し込んでください。そうすることで再度挿し込むことができます。
+* microSDカードを抜いてしまった場合はArduino Mega 2560 の電源を入れなおしてください。正常に記録されない可能性があります。
+* もしフラットケーブルがFeliCaカードリーダ/ライターから抜けてしまった場合、コネクタ口に青いビラビラが表になるように合わせて、爪でケーブルを押し込んでください。そうすることで再度挿し込むことができます。
 
 
 # 使用部品
