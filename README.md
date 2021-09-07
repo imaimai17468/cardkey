@@ -105,7 +105,7 @@ cardkey.ino の以下のコードのコメントアウトを外しコンパイ�
 DS3231用のボタン電池（LIR2032）
 
 # 回路図
-![回路図](cardkey.png)
+![回路図](cardkey_v2.png)
 
 ## Arduino Mega 2560 とセンサの接続
 | Arduino Mega 2560 | ピッチ変換基板 |
