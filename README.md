@@ -161,7 +161,3 @@ http://blog.felicalauncher.com/sdk_for_air/?page_id=2699
 
 # 執筆者について
 - [Twitter](https://twitter.com/imaimai17468)
-
-- mail
-    - tosiki_801_life@outlook.jp (PC)
-    - tosiki_801_life@icloud.com (携帯)
